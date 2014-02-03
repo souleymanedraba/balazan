@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>Usage Instructions</title>
+
+<style type="text/css">body{width:750px;margin:36px auto 20px auto;font:16px/25px Georgia,Times,'Times New Roman',serif}a:link,a:visited{color:#2f6eb9;text-decoration:none}a:hover,a:active{text-decoration:underline}h1,h2,h3,h4,h5,h6{margin:40px 0 30px 0;color:#000;font-weight:bold;font-family:Arial,sans-serif}h1{margin-top:80px;font-size:2.2em}code{padding:0 3px;background:#eee}pre code{padding:0}pre{padding:9px;background:#eee;border:1px solid #ccc}ul{list-style:square}p.first{font-size:21px}p.second{font-size:15px}ul.space li{margin-bottom:10px}.section{overflow:hidden}.columns-2{float:left;width:350px;margin:0 0 21px 25px}.columns-3{float:left;width:230px;margin:0 0 21px 20px}</style>
+
+</head>
+<body>
+
+<h1>Usage Instructions</h1>
+<pre><code> <br /> <b>Note:</b> This is universal guide for all our themes that covers all the  <br /> settings (even if this theme doesn't have some). You don't have to read  <br /> everything if theme doesn't supports everything. For example, <br /> we are writing here about 2 ways of setting up slider, and you need to know <br /> only one, noted in theme options. If you have any problems, please consult <br /> first this readme, instructions from theme options, <a href="http://www.simplewpthemes.com/faq/">FAQ on our site</a>, theme<br /> comments on our site, or feel free to post a comment. <br /> Enjoy reading, and wish you luck with your project!
+	</code>
+</pre>
+<h2>Installation</h2>
+<ol>
+<li>Login into your <b>Wordpress administration - Dashboard >  Appearance > Add New Themes > Upload</b> or Extract theme.zip and upload the theme folder via FTP to your wp-content/themes/ directory.</li>
+<li>Go to your WordPress admin <b>Dashboard > Appearance > Themes</b> and activate this theme. Once activated, you're ready to use it.</li>
+</ol>
+
+<h2>How to change the logo</h2>
+<p>Many of our themes come with logo image instead of text. In order to change logo image, you only need edit <a target="_blank" href="images/logo.png" title="See how original logo looks">original logo</a> image from theme/images folder. There is also a psd for logo (Photoshop file, can be opened with Gimp too), that you can edit to keep the original look of the logo. In themes folder, you'll see logo folder. Inside you'll find logo.zip. Extract it. </p>
+<p>You'll also see font file that is used for logo, so first - install font (for Win users double click to open file, and click Install).</p>
+<p>Now open up logo.psd in Photoshop. Click "T" button on the left toolbar (this is button for editing text), and click on the text of the logo. Now, just delete text, and type your own - site name, or whatever.</p>
+<p>The last step is to save it. Click File / Save for web & devices,  and on the right side - you'll see extension type (gif, jpg, png-8, png-24, and bmp). Choose png-24. Now click save and and name it logo. </p>
+<p>You can save logo anywhere you want, but you still have to replace original logo.png that's located in <b>site_folder/wp-content/themes/theme/images/</b> folder. If you're working in localhost this is possible, but if you're not - you need to upload it to your server on this path. That's it!</p>
+
+<h2>Content Slider</h2>
+
+<p>There are two parts of setting up slider, the first one is in Theme Options, and the second one is - setting up the images.</p>
+<h3>First part - theme options</h3>
+<ol>
+	<li>Go to <b>Appearance / Theme Options / Slider Settings</b></li>
+	<li>Under <b>Enable / Disable Content Slider</b> and set it to <b>Display</b></li>
+	<li>Under <b>Select sliding category</b> select the sliding category. This is the category from which posts will be shown. If you want to show posts from multiple categories, you should make for example "Featured" category, and assign all posts that you want in the slider into that category too.</li>
+	<li>Enter the number of slides that you want in the slider</li>
+</ol>
+<p>The second part is setting up the images. This is for many people tricky part. There are two ways of setting up the images, first one is with custom fields (the most often on our themes), and the second one - more simpler, but limitating - using featured images.</p>
+
+<h3>Part 2a: Setting up slider with custom fields</h3>
+
+<p>First thing here is to open post from selected sliding category (the one from first part). Next, you need to enable custom fields. At the top right corner of your dashboard - you'll see screen options. Check the image bellow:</p>
+
+<img src="includes/images/z-readme-screen-options.png" title="Screen Options - Enable Custom Fields Here" />
+
+<p>Now click here and options will show up. Click to enable custom fields.</p>
+
+<p>Custom fields will now appear under your editor.</p>
+
+<img src="includes/images/howtoslide.png" title="Custom Fields" />
+
+<p>Next step is to upload image that you want in the slider (the same way you upload images to posts). So, click on the uploading button "Upload / Insert" (check the image).</p>
+
+<img src="includes/images/z-upload.jpg" title="Images Upload" />
+
+<p>Drag your file on the uploader, and once the image is uploaded you'll see additional options there.</p>
+
+<img src="includes/images/z-link.png" title="Image Link" />
+
+<p>Now you see <b>Link Url</b>. Now make sure that your link is good for example - <b>http://www.your-site.com/wp-content/uploads/2012/08/12.jpeg</b> and not like <b>http://www.your-site.com/?attachment_id=1153</b>. If Wordpress show's you <b>?attachment_id=</b> at the end of url - that won't work for the slider. Just click on <b>File URL</b> button under <b>Link URL</b> and you'll get a proper link. Now copy the link, and close the popup (no need to save anything).</p>
+
+<p>Go to the custom fields - and on the right side under the <b>"Value"</b> paste image link. On the left side - under <b>"Name"</b> type <b>slide</b> and click <b>Add custom field button</b>.</p>
+
+<img src="includes/images/howtoslide.png" title="Custom Fields" />
+
+<p>That's it! You may skip the next part if slider is working.</p>
+
+<h3>Part 2b: Setting up slider with featured images</h3>
+
+<p>First thing here is to open post from selected sliding category (the one from first part). In the right column you'll see <b>"Featured Image"</b>.</p>
+
+<img src="includes/images/z-featured.png" title="Featured Images" />
+
+<p>Click on <b>Set featured image</b>, and image uploader will show up. Drag your image there, and click <b>"Use as Featured Image"</b> (image bellow).</p>
+
+<img src="includes/images/z-link.png" title="Featured Images Setting" />
+
+<p>Now just click update or publish post, and that's it.</p>
+
+<h2>Gallery Slider</h2>
+
+<p>If theme has built in gallery slider like jcarousel, where only images and post titles are shown - you set it up the same way as content slider, with one difference. The difference is in <b>"Name"</b> in custom fields, you type <b>thumbnail</b> and not "slide". Of course, gallery sometime's uses featured images, so you don't have to do anything, except to enable it and select sliding category and number of slides.</p>
+
+<br />
+<p>This theme is made by <a href="http://www.simplewpthemes.com" title="Free WP Themes">Simplewpthemes.com</a>.</p>
+
+</body>
+</html>

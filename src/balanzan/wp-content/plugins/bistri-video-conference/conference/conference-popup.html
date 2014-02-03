@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+<script type="text/javascript" src="https://api.bistri.com/bistri.conference.min.js?v=1.0"></script>
+<script type="text/javascript" src="./conference.js"></script>
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+<link href="./conference.css" rel="stylesheet">
+</head>
+<body>
+	<a href="https://bistri.com" target="_blank" class="bistri-logo"></a>
+	<div class="stripes"></div>
+	<div class="conference container-fluid">
+
+		<div class="row-fluid">
+			<div class="span12 remote-streams">
+				<div class="row">
+					<div class="span6" id="video-1"></div>
+					<div class="span6" id="video-2"></div>
+				</div>
+				<div class="row">
+					<div class="span6" id="video-3"></div>
+					<div class="span6 local-stream"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row-fluid compatibility" data-bind="visible: !isCompatible()">
+			<div class="span12">Sorry your browser is not compatible.<br>We invite you to use a webRTC enabled browser:
+			<a href="http://www.mozilla.org/en-US/firefox/new/" target="_blank">Firefox 22+</a> or <a href="https://www.google.com/intl/en/chrome/browser/" target="_blank">Chrome 23+</a></div>
+		</div>
+
+		<div class="row-fluid connecting" data-bind="visible: !connected() && isCompatible()">
+			<div class="span12">connecting ...</div>
+		</div>
+
+		<div class="row-fluid device-selector" data-bind="visible: connected() && !joinedRoom()">
+			<div class="span12">
+				<p><input type="button" value="Use SD webcam" data-bind="click: startWebcamSD" class="btn btn-info btn-large"/></p>
+				<p><input type="button" value="Use HD webcam" data-bind="click: startWebcamHD" class="btn btn-info btn-large"/></p>
+				<p><input type="button" value="Share screen (*)"  data-bind="click: shareScreen" class="btn btn-info btn-large"/></p>
+				<p class="warn">(*): Screen sharing feature is available in Google Chrome 27+ with "Enable screen capture support in getUserMedia()" flag activated in chrome://flags</p>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+a.bistri-video-conference {
+
+    /* css reset start */
+    margin: 0 !important;
+    padding: 0 7px 0 0 !important;
+    font-size: 100% !important;
+    vertical-align: baseline !important;
+    background-color: transparent !important;
+   /* css reset end */
+
+	display: inline-block !important;
+	cursor: pointer !important;
+	height: 35px !important;
+	background-position: top right !important;
+	background-image:url(./images/right-part.png) !important;
+}
+
+a.bistri-video-conference span {
+
+    /* css reset start */
+    margin: 0 !important;
+    padding: 0 0 0 42px !important;
+    border: 0 !important;
+    outline: 0 !important;
+    font-size: 100% !important;
+    vertical-align: baseline !important;
+    background-color: transparent !important;
+   /* css reset end */
+
+	float: left !important;
+	height: 35px !important;
+	line-height: 35px !important;
+	font-size: 14px !important;
+	font-weight: bold !important;
+	color: #ff6600 !important;
+	font-family: Helvetica, Arial !important;
+	background-position: top left !important;
+	background-image:url(./images/left-part.png) !important;
+}
