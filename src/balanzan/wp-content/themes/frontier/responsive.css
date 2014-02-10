@@ -1,0 +1,65 @@
+/*-------------------------------------
+   Responsive Properties
+--------------------------------------*/
+#container {max-width: 100%;}
+
+@media screen and (max-width:840px){
+	#main #content {display: block;}
+	#main #content,
+	#main .sidebar {
+		width: 100%;
+		max-width: 100%;
+	}
+}
+
+@media screen and (max-width:640px){
+	#footer .widget-footer {
+		display: block;
+		margin: 0 0 10px;
+		width: 100%;
+	}
+}
+
+@media screen and (max-width:480px){
+	#header-logo {margin: 0;}
+
+	#nav-top {
+		display: block;
+		float: none;
+		clear: both;
+	}
+	#nav-top .nav-top {float: none;}
+
+	#nav-main {padding-left: 0;}
+	#nav-main .nav-main {
+		float: none;
+		border: none;
+	}
+	#nav-main .nav-main > li,
+	#nav-main .nav-main > ul > li {
+		float: none;
+		border-bottom: 1px solid #222;
+		border-left: none;
+		border-right: none;
+	}
+	#nav-main .nav-main > li:last-child,
+	#nav-main .nav-main > ul > li:last-child {border-bottom: none;}
+
+	.rtl #nav-main {padding-right: 0;}
+	.rtl #nav-main .nav-main,
+	.rtl #nav-main .nav-main li {float: none;}
+}
+
+@media screen and (max-width:360px){
+	.bjqs-heading,
+	.bjqs-descript {display: none;}
+
+	.entry-excerpt,
+	.entry-thumbnail {
+		clear: both;
+		padding-right: 0;
+	}
+	.entry-thumbnail {margin-bottom: 4px;}
+
+	.rtl .entry-thumbnail {padding-left: 0;}
+}

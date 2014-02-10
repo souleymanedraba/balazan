@@ -1,0 +1,126 @@
+@import url(http://fonts.googleapis.com/css?family=Varela|Roboto+Condensed);
+
+html {background: #EEE;}
+
+.mceContentBody {
+    background: #FFF;
+	padding: 10px;
+	margin: 10px auto;
+    font-family: Varela, Arial, Sans-serif;
+    font-size: 14px;
+	font-weight: normal;
+	line-height: 21px;
+	box-shadow: 0px 0px 3px #111;
+}
+
+.cf:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+h1 {font-size: 24px;}
+h2 {font-size: 22px;}
+h3 {font-size: 20px;}
+h4 {font-size: 18px;}
+h5 {font-size: 16px;}
+h6 {font-size: 14px;}
+h1,h2,h3,h4,h5,h6 {
+	font-family: 'Roboto Condensed', Arial, Sans-serif;
+	font-weight: normal;
+	margin-bottom: 4px; 
+	margin-top: 8px;
+	clear: none;
+}
+
+.mceContentBody h1:first-child, .mceContentBody h2:first-child,
+.mceContentBody h3:first-child, .mceContentBody h4:first-child,
+.mceContentBody h5:first-child, .mceContentBody h6:first-child {
+    margin-top: 0;
+}
+
+p { 
+	margin-top: 4px; 
+	margin-bottom: 14px; 
+}
+
+ul li {margin-top: 4px; margin-bottom: 4px;}
+
+blockquote {
+	background-color: #EDEDED;
+    border-left: 6px solid #687888;
+	clear: both;
+    margin: 20px;
+    padding: 10px 14px 4px;
+	overflow: hidden;
+}
+blockquote p {font-style: italic;}
+blockquote cite {
+	float: right;
+	margin-bottom: 8px;
+	font-size: 13px;
+	font-style: normal;
+}
+
+pre {
+    background-color: #F0F0F0;
+    border: 1px solid #AAA;
+	margin: 8px 0;
+    padding: 8px;
+	overflow: auto;
+	-ms-word-wrap: normal;
+	word-wrap: normal;
+	line-height: 20px;
+}
+
+table {
+    border-collapse: collapse;
+	width: 95%;
+	margin: 10px auto;
+}
+th {
+	background-color: #C8CACD;
+	font-weight: normal;
+}
+th, td {
+	border: 1px solid #555 !important;
+	padding: 8px 10px;
+	text-align: left;
+	font-size: 13px;
+}
+
+.mceContentBody .wp-caption, .mceContentBody img {
+	max-width: 100%;
+	height: auto;
+}
+
+.alignnone {
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+.alignleft {
+	display:inline;
+	float:left;
+	margin-top: 4px;
+	margin-left: 0;
+	margin-right: 8px;
+	margin-bottom: 4px;
+}
+.alignright {
+	display:inline;
+	float:right;
+	margin-top: 4px;
+	margin-left: 8px;
+	margin-right: 0;
+	margin-bottom: 4px;
+}
+.aligncenter {
+	display:block;
+	clear: both;
+	margin-top: 4px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 4px;
+}
+
+.wp-caption-dd {text-align: left;}

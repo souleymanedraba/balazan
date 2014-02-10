@@ -11,12 +11,12 @@
 
 if ( is_active_sidebar( 'subsidiary' ) ) : ?>
 
-	<div id="sidebar-subsidiary" class="sidebar">
+	<!--div id="sidebar-subsidiary" class="sidebar">
 		
 		<div class="wrap">
 			<?php dynamic_sidebar( 'subsidiary' ); ?>
-		</div><!-- .wrap -->
+		</div>
 		
-	</div><!-- #sidebar-subsidiary .aside -->
+	</div>-->
 
 <?php endif; ?>

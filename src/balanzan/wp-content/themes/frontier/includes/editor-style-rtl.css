@@ -1,0 +1,14 @@
+blockquote {
+	border-left: none;
+	border-right: 6px solid #687888;
+}
+
+blockquote cite {
+    float: left;
+}
+
+caption, th, td {
+	text-align: right;
+}
+
+.wp-caption-dd {text-align: right;}
