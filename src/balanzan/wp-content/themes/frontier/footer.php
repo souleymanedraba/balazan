@@ -17,7 +17,7 @@
 	<?php endif; ?>
 
 	<?php if ( frontier_option('theme_link_disable', 0) == 0 ) : ?>
-		<?php $frontier_theme_link = '<a href="' . esc_url( 'http://ronangelo.com/frontier/' ) . '">Frontier Theme</a>'; ?>
+		<?php $frontier_theme_link = '<a href="' . esc_url( 'http://ronangelo.com/frontier/' ) . '">Balazan</a>'; ?>
 		<span id="theme-page"><?php echo apply_filters( 'frontier_theme_link', $frontier_theme_link ); ?></span>
 	<?php endif; ?>
 
