@@ -73,13 +73,13 @@
     <label><input type="checkbox" name="rememberme" value="forever" tabindex="9" /> <?php _e("Se souvenir de moi"); ?></label><br />
     <input type="button" name="submit" value="<?php _e('Connexion'); ?> &raquo;" tabindex="10" onclick="al_login();"/><br/>
     <span id="al_loginMessage"></span>
-    <a href="javascript:al_showRegister();">Register</a> | <a href="javascript:al_showLostPassword();">Lost password?</a>
+    <a href="javascript:al_showRegister();">Enregistrer</a> | <a href="javascript:al_showLostPassword();">Mot de passe oublié ?</a>
     </form>
 </div>
 </div>
 
 <div id="al_register" class="al_nodisplay">
-<h3>Register</h3>
+<h3>Enregistrer</h3>
 <hr/>
 <div>
     <form name="al_registerForm" onsubmit="return false;" id="al_registerForm" action="#" method="post">
@@ -87,7 +87,7 @@
     <label><?php _e('E-mail') ?>:<br /> <input onkeypress="return al_registerOnEnter(event);" type="text" name="user_email" value="" size="20" tabindex="8" /></label><br />
 
     <input type="button" name="submit" value="<?php _e('Register'); ?> &raquo;" tabindex="10" onclick="al_register();"/><br/>
-    <span id="al_registerMessage">A password will be mailed to you.<br/></span>
+    <span id="al_registerMessage">Un mot de passe vous sera envoyé.<br/></span>
 
     <a href="javascript:al_showLogin();">Connexion</a> | <a href="javascript:al_showLostPassword();">Mot de passe oublié ?</a>
     </form>
