@@ -72,3 +72,14 @@ piklist('field', array(
 		,'non' => __('No', 'clicface-trombi')
 	)
 ));
+
+piklist('field', array(
+	'type' => 'file'
+	,'field' => 'trombi_default_picture'
+	,'label' => __('Default picture URL', 'clicface-trombi')
+	,'description' => __('This picture will be displayed if no picture is provided.', 'clicface-trombi')
+	,'options' => array(
+		'title' => 'Add a picture'
+		,'button' => 'Add a picture'
+	)
+));

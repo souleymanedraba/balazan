@@ -51,27 +51,26 @@ class clicface_Collaborateur {
 			$this->Commentaires = get_post_meta($id , 'commentaires', true);
 			
 			// Photo
-			$args = array(
-				'post_type' => 'attachment'
-				,'numberposts' => 1
-				,'post_parent' => $id
-				,'post_status' => 'all'
-			);
-			$attachments = get_posts( $args );
-			if ($attachments) {
-				global $wp_post_statuses;
-				remove_all_filters('get_the_excerpt'); // Since we're using the_excerpt for notes, we need to keep it clean.
-				foreach ( $attachments as $post ) {
-					setup_postdata($post);
-					$this->PhotoThumbnail = wp_get_attachment_image( $post->ID, 'thumbnail', false );
-					
-					$this->PhotoLarge = '<div id="pik_post_attachment_' . $post->ID . '" class="piklist-field-container">';
-					$this->PhotoLarge .= '<div class="piklist-label-container">' . wp_get_attachment_image( $post->ID, 'large', false ) . '</div>';
-					$this->PhotoLarge .= '</div>';
-				}
+			$photo_array = array_filter( get_post_meta( $id, 'upload_photo', false ) );
+			$photo_id = array_shift(array_slice($photo_array, 0, 1));
+			if ( $photo_id != NULL ) {
+				$this->PhotoThumbnail = wp_get_attachment_image( $photo_id, 'thumbnail', false );
+				$this->PhotoLarge = '<div id="pik_post_attachment_' . $id . '" class="piklist-field-container">';
+				$this->PhotoLarge .= '<div class="piklist-label-container">' . wp_get_attachment_image( $id, 'large', false ) . '</div>';
+				$this->PhotoLarge .= '</div>';
 			} else {
-				$this->PhotoThumbnail = '-';
+				$this->PhotoThumbnail = NULL;
 				$this->PhotoLarge = NULL;
+			}
+			if ( $this->PhotoThumbnail == NULL ) {
+				$clicface_trombi_settings = get_option('clicface_trombi_settings');
+				if ( !empty( $clicface_trombi_settings['trombi_default_picture'] ) ) {
+					$default_picture_array = array_filter( $clicface_trombi_settings['trombi_default_picture'] );
+					$default_picture_id = array_shift(array_slice($default_picture_array, 0, 1));
+					$this->PhotoThumbnail = wp_get_attachment_image( $default_picture_id, 'thumbnail', false );
+				} else {
+					$this->PhotoThumbnail = '<img src="' . plugins_url( 'img/default_picture.png' , dirname(__FILE__) ) . '" alt="" />';
+				} 
 			}
 			
 			$this->Erreur = false;

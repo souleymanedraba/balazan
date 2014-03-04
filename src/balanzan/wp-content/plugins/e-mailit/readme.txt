@@ -4,31 +4,43 @@ Tags: +1, ad, AddThis, addtoany, admin, ads, add this, advertising, analytics, b
 
 Requires at least: 2.9
 Tested up to: 3.8
-Stable tag: 5.3.8
+Stable tag: 6.3
 License: GPLv2 or later 
 
-E-MAILiT platform help publishers promote and monetize content through innovation - features share buttons, floating ShareBars and Analytics.
+E-MAILiT sharing plugin help people share your posts and/or pages using any service, such as Facebook, Twitter, WhatsApp & Foursquare.
 
 == Description == 
 
-E-MAILiT Share Buttons (with integrated/customized **third-party share counter buttons** and **Floating ShareBars**) can be placed anywhere in your site and contain a searchable menu of every applicable service, with the most popular displayed by default. You can also show/hide the counter and set your own ''via @Twitter Username''. Create an account is optional (current available Register/Sign In methods via <a href="http://www.e-mailit.com/widget/login">E-MAILiT</a> and <a href="http://www.e-mailit.com/widget/php/fb/login_facebook.php">Facebook</a>). Registering an account, you also get analytics, customize button style (background color, text color, display your text, 6 ShareBar positions, in content buttons), open the widget on click or on hover, customize/arrange and prioritize which Services (for Sharing) and Channels (for Following) you want to include, Promo Display options and create ad campaigns. By default, we provide you with a standard version of our plugin. 
+> E-MAILiT Share Buttons can be placed anywhere in your site and contain a searchable menu of every applicable service, with the most popular displayed by default. You can also show/hide the counter or even remove the button itself (using the Third-party Share Buttons instead) and set your own ''via @Twitter Username''.
+
+<a href="http://www.e-mailit.com">Share Buttons</a> (demo)
+
+* for demo purposes the ad popup, in our website, is open and by default closed in your share plugin. 
+* the WhatsApp service, is currently available only in iOS mobile devices. 
+
+**Summary of Features**  
+
+* Easy to Install 
+* Increase Content Distribution & Engagement, Ranking & Traffic 
+* Enable Media Solutions 
+* Detailed Analytics 
+* Easy Bookmarking, Sharing & Following 
+* 60 Sharing Services 
+* Less Clutter 
+* Fast & Reliable Performance 
+* Asynchronous Loading Support 
+* Content Delivery Network support 
+* Automatically localized in English, Greek, Afrikaans, Albanian, Arabic, Armenian, Azerbaijani, Basque, Belarusian, Bengali, Bosnian, Bulgarian, Catalan; Valencian, Central Khmer, Chinese, Croatian, Czech, Danish, Dutch; Flemish, Esperanto, Estonian, Faroese, Finnish, French, Galician, Georgian, German, Gujarati, Haitian, Hebrew, Hindi, Hungarian, Icelandic, Indonesian, Irish, Italian, Japanese, Kannada, Korean, Kurdish, Latin, Latvian, Lithuanian, Luxembourgish, Malay, Maltese, Mongolian, Northern Sami, Norwegian, Pashto, Persian, Polish, Portuguese, Romanian, Russian, Serbian, Sinhala, Slovak, Slovenian, Spanish, Sundanese, Swahili, Swedish, Tagalog, Tamil, Tatar, Telugu, Thai, Tswana, Turkish, Ukrainian, Urdu, Vietnamese, Welsh, Yiddish 
+* Lightweight File Size 
+* Easily Customizable 
+* Third-party Share Buttons & Floating ShareBars support 
+
+Let sharing work for you, everywhere. Add sharing, following & campaigns to desktop sites and mobile devices. Monetize your content through E-MAILiT's innovation.  
+<a href="http://www.e-mailit.com/widget/login">Want to customize?</a> 
 
 Read the <a href="http://wordpress.org/plugins/e-mailit/faq/">FAQ</a> tab to learn more. 
 
-<a href="http://www.e-mailit.com/demos/demo1">Check out the Demo of the E-MAILiT Share Plugin</a> 
-
-**Features** 
-
-* Increases your site's traffic. 
-* Uses industry best practices and its light weight JavaScript does not effect your site's loading speed with its simplicity and performance, because all of the processing runs on our cloud servers and not yours. 
-* Is hosted on CloudFlare's CDN, making it as reliable as possible. 
-* Support asynchronous which ensures a fast page launch by loading your E-MAILiT button script at the end, without long wait periods, keeping your visitors engaged with your content. 
-* Allows you to painlessly and super fast add social life-cycle engagement suite (sharing and following features) to all your posts, pages and custom post types. 
-* Track your social data and analyze metrics. 
-* Is localized in 75 languages. 
-* <a href="http://www.e-mailit.com/share/mobile">Optimized</a> for mobile devices like the iPhone, iPod touch, iPad, Android mobile phones, and more! Share anywhere and anytime on your mobile websites, with the E-MAILiT Mobile-ready auto-optimized share tool (with automatic detection of device-type). 
-
-<a href="http://blog.e-mailit.com">Blog</a> | <a href="http://twitter.com/emailit">Follow us on Twitter</a> | <a href="http://www.crunchbase.com/company/e-mailit">CrunchBase Profile</a>
+<a href="http://twitter.com/emailit">Follow us on Twitter</a>
 
 == Installation ==
 
@@ -122,7 +134,7 @@ There is no need to edit any line of code. The whole installation procedure of o
 
 <h4>How do I eliminate the plugin from certain pages?</h4>
 
-Unfortunately, there is no option in WordPress for something like this. There is no an automated solution to delete locally and in certain pages, the share button code. Also, if you choose to auto-install our plugin you can't edit the html source code of your wp pages, to delete our code in certain pages. You can do the opposite, though, if you are familiar editing html and javascript code. Try to put in your preferred pages our share button code, manually. Please, if you want our default version, follow this link http://www.e-mailit.com/get Otherwise, if you want to customize it, please Create a free account http://www.e-mailit.com/widget/login
+Unfortunately, there is no option in WordPress for something like this. There is no an automated solution to delete locally and in certain pages, the share button code. Also, if you choose to auto-install our plugin you can't edit the html source code of your wp pages, to delete our code in certain pages. You can do the opposite, though, if you are familiar editing html and javascript code. Try to put in your preferred pages our share button code, manually.
 
 <h4>How do I activate / de-activate your plugin?</h4>
 
@@ -130,7 +142,7 @@ Please, read the guide here http://wordpress.org/plugins/e-mailit/installation
 
 <h4>I can't remove your plugin. Are you giving us a trouble plugin?</h4>
 
-It would be dumb and catastrophic for us, to develop a plugin which can not uninstall from the computer systems. After receiving a few support messages, on how to remove the plugin, have been revealed that the default un-installation procedure, isn't working for all, because when they installed the E-MAILiT button they had done it using the manual installation process, as described here http://www.e-mailit.com/get As a result, when they decided to un-install, they thought that by removing the plugin, it will also remove the javascript code which they had manually inserted in their websites. The result of this awkward situation is that those specific users are contacting with our support team, claiming that our plugin is a harmful malware, which leaves code behind, because they can not un-install it from their website. The only code that the plugin is going to position in a website, can be found here /wp-content/plugins/emailit directory, and there is no way for our plugin to work properly, if this folder has been deleted. We would like to inform, that our plugin is officially being accepted, after a thorough testing, from the WordPress Plugins Directory. Also, we don't write the un-uninstallation code of the plugin. This is an automated proccess through WordPress. After some threads to our support forum and a single private message via email, we wanted to put an end on this and finally to make it clear to any user, who tries to un-install with the wrong way our plugin.
+It would be dumb and catastrophic for us, to develop a plugin which can not uninstall from the computer systems. After receiving a few support messages, on how to remove the plugin, have been revealed that the default un-installation procedure, isn't working for all, because when they installed the E-MAILiT button they had done it using the manual installation process. As a result, when they decided to un-install, they thought that by removing the plugin, it will also remove the javascript code which they had manually inserted in their websites. The result of this awkward situation is that those specific users are contacting with our support team, claiming that our plugin is a harmful malware, which leaves code behind, because they can not un-install it from their website. The only code that the plugin is going to position in a website, can be found here /wp-content/plugins/emailit directory, and there is no way for our plugin to work properly, if this folder has been deleted. We would like to inform, that our plugin is officially being accepted, after a thorough testing, from the WordPress Plugins Directory. Also, we don't write the un-uninstallation code of the plugin. This is an automated proccess through WordPress. After some threads to our support forum and a single private message via email, we wanted to put an end on this and finally to make it clear to any user, who tries to un-install with the wrong way our plugin.
 
 <h4>How do I link the Facebook Like Button or the Tweet Button to my pages?</h4>
 
@@ -148,12 +160,36 @@ Afrikaans, Albanian, Arabic, Armenian, Azerbaijani, Basque, Belarusian, Bengali,
 
 We are not spammers. By default, when a visitor returns to your site, after clicking to share your content via a service, they will see an advertisement, on the left of the share menu. This advertisement never shows when the share menu of the E-MAILiT button opens at first. It will never show up on your visitor's screen, if they do not click on a sharing service. Our strategy is not making you or your visitors feel frustrated, so we display advertisements in this smart way. On the other hand, you have the option to automatically show/hide the Ad Display on the widget's share menu. The advertisement is there for anyone interested to see, or you can simply hide it! It is that easy. The only thing you need to do is to create a free account and customize your settings.
 
+<h4>Does your share button appears last in my pages and causes extra loading time to my site?</h4>
+<ul>
+<li>Well-engineered and optimized code will not slow or block your website pages from loading.</li>
+<li>We use caching via major global CDNs. A content delivery network (CDN) can give an equally fast web experience across the globe and is a collection of web servers distributed across multiple locations to deliver content more efficiently to users.</li>
+<li>Asynchronous ensure a fast page launch by loading your E-MAILiT button script at the end, without long wait periods, keeping your visitors engaged with your content.</li>
+<li>Google Page Speed Insight Compliant / Optimized.</li>
+<li>Use very light weight script which do not effect your site's loading speed.</li>
+</ul>
+
 == Screenshots ==
 01. Plugin options (a)
 02. Plugin options (b)
 03. Plugin options (c)
 
 == Changelog ==
+= 6.3 =
+* Add WhatsApp.
+= 6.0.2.1 =
+* Bug Fixes.
+= 6.0.2 =
+* Remove E-MAILiT pink Share Button and use only the (out of the box) third-party share counter buttons.
+* Other plugin conflicts: Resolved.
+= 6.0.1 =
+* Update FAQ.
+* Bug Fixes.
+= 6.0 [2014-2-9] =
+* Launch of our new E-MAILiT website!
+= 5.4 =
+* Remove Hyves
+* Add Mail.Ru
 = 5.3.8 =
 * Backend admin panel modifications.
 * Minor bug fixes: style/template conflicts resolved.

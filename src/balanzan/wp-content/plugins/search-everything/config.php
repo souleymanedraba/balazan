@@ -1,9 +1,22 @@
 <?php
 
-global $se_options, $se_meta;
+global $se_options, $se_meta, $se_global_notice_pages;
 $se_options = false;
 $se_meta = false;
 
+$se_global_notice_pages = array('plugins.php', 'index.php', 'update-core.php');
+
+$se_response_messages = array(
+	SE_PREFS_STATE_NOT_ENGLISH => __('<a href="http://support.zemanta.com/customer/portal/articles/674752-which-languages-does-zemanta-support" target="_blank">Your blog is not in English</a>', 'SearchEverything'),
+	SE_PREFS_STATE_EMPTY => __('Your blog feed is empty', 'SearchEverything'),
+	SE_PREFS_STATE_FAILED => __('Unable to reslove URL to a source feed' , 'SearchEverything'),
+	SE_PREFS_STATE_FOUND => __('You are connected to Zemanta network', 'SearchEverything')
+);
+
+function se_get_response_messages() {
+	global $se_response_messages;
+	return $se_response_messages;
+}
 
 function se_get_options() {
 	global $se_options, $se_meta;
@@ -61,6 +74,21 @@ function se_update_options($new_options) {
 	return $r;
 }
 
+function se_set_global_notice() {
+	$url = admin_url( 'options-general.php' );
+	$url = add_query_arg( array(
+		'page' => 'extend_search',
+		'se_global_notice' => 0,
+	), $url );
+	
+	$se_meta = get_option('se_meta', false);
+	$se_meta['se_global_notice'] = array(
+		'title' => 'Search everything has been updated with security fixes!',
+		'message' => 'Search Everything has been upgraded with security updates and some exciting new features. Visit <a href="'.$url.'">settings</a> to learn more.'
+	);
+	se_update_meta($se_meta);
+}
+
 //we have to be careful, as previously version was not stored in the options!
 function se_upgrade() {
 	$se_meta = get_option('se_meta', false);
@@ -72,7 +100,7 @@ function se_upgrade() {
 
 	if($version) {
 		if(version_compare($version, SE_VERSION, '<')) {
-			call_user_func('wp_se_migrate_' . str_replace('.', '_', $version));
+			call_user_func('se_migrate_' . str_replace('.', '_', $version));
 			se_upgrade();
 		}
 	} else {
@@ -84,6 +112,51 @@ function se_upgrade() {
 			se_install();
 		}
 	}
+}
+
+function se_migrate_7_0_4() {
+	$se_meta = get_option('se_meta', false);
+
+	if ($se_meta) {
+		$se_meta['version'] = '8.0';
+		$se_meta['api_key'] = false;
+	}
+
+	$se_options = get_option('se_options', false);
+
+	//enable external search
+	$se_options['se_research_widget'] = array (
+		'visible_on_compose'		=> true,
+		'external_search_enabled'	=> false,
+		'notice_visible'			=> true,
+		);
+	$se_meta['show_options_page_notice'] = false;
+
+	update_option('se_meta',$se_meta);
+	update_option('se_options',$se_options);
+
+	se_set_global_notice();
+}
+
+function se_migrate_7_0_3() {
+
+	$se_meta = get_option('se_meta', false);
+
+	if ($se_meta) {
+		$se_meta['version'] = '7.0.4';
+	}
+	update_option('se_meta',$se_meta);
+}
+
+
+function se_migrate_7_0_2() {
+
+	$se_meta = get_option('se_meta', false);
+
+	if ($se_meta) {
+		$se_meta['version'] = '7.0.3';
+	}
+	update_option('se_meta',$se_meta);
 }
 
 
@@ -152,19 +225,21 @@ function se_migrate_7_0_1() {
 function se_install() {
 	$se_meta = array(
 		'blog_id' => false,
+		'api_key' => false,
 		'auth_key' => false,
 		'version' => SE_VERSION,
 		'first_version' => SE_VERSION,
 		'new_user' => true,
 		'name' => '',
 		'email' => '',
-		'show_options_page_notice'	=> true
+		'show_options_page_notice'	=> false
 	);
 	$se_options = se_get_default_options();
 
 	update_option('se_meta', $se_meta);
 	update_option('se_options', $se_options);
 
+	se_set_global_notice();
 }
 
 function se_get_default_options() {
@@ -174,11 +249,11 @@ function se_get_default_options() {
 				'se_exclude_posts'		=> '',
 				'se_exclude_posts_list'		=> '',
 				'se_use_page_search'		=>false,
-				'se_use_comment_search' 	=>false,
+				'se_use_comment_search' 	=>true,
 				'se_use_tag_search'		=> false,
 				'se_use_tax_search'		=> false,
-				'se_use_category_search'	=> false,
-				'se_approved_comments_only'=> false,
+				'se_use_category_search'	=> true,
+				'se_approved_comments_only'=> true,
 				'se_approved_pages_only'	=> false,
 				'se_use_excerpt_search'	=> false,
 				'se_use_draft_search'		=> false,
@@ -186,12 +261,16 @@ function se_get_default_options() {
 				'se_use_authors'		=> false,
 				'se_use_cmt_authors'		=> false,
 				'se_use_metadata_search'	=> false,
-				'se_use_highlight'		=> false,
-				'se_highlight_color'		=> '',
-				'se_highlight_style'		=> ''
+				'se_use_highlight'		=> true,
+				'se_highlight_color'		=> 'orange',
+				'se_highlight_style'		=> '',
+				'se_research_metabox'		 	=> array (
+					'visible_on_compose'		=> true,
+					'external_search_enabled'	=> false,
+					'notice_visible'			=> true
+				)
 			);
 
 	return $se_options;
 }
 
-?>

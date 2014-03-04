@@ -3,7 +3,7 @@
 Plugin Name: Clicface Trombi
 Plugin URI: http://www.clicface.com/
 Description: A great plugin for WordPress that creates a directory of all your employees.
-Version: 1.12
+Version: 1.13
 Author: Clicface
 Author URI: http://www.clicface.com/
 Plugin Type: Piklist
@@ -45,6 +45,8 @@ function piklist_collaborateur_admin_pages($pages) {
 add_filter('piklist_post_types', 'piklist_collaborateur_post_types');
 function piklist_collaborateur_post_types($post_types) {
 	$clicface_trombi_settings = get_option('clicface_trombi_settings');
+	if ( !isset( $clicface_trombi_settings['trombi_title_name_singular'] ) ) $clicface_trombi_settings['trombi_title_name_singular'] = __('Employee', 'clicface-trombi');
+	if ( !isset( $clicface_trombi_settings['trombi_title_name_plural'] ) ) $clicface_trombi_settings['trombi_title_name_plural'] = __('Employees', 'clicface-trombi');
 	$label_name_plural = ($clicface_trombi_settings['trombi_title_name_plural']) ? $clicface_trombi_settings['trombi_title_name_plural'] : __('Employees', 'clicface-trombi');
 	$label_name_singular = ($clicface_trombi_settings['trombi_title_name_singular']) ? $clicface_trombi_settings['trombi_title_name_singular'] : __('Employee', 'clicface-trombi');
 	$post_types['collaborateur'] = array(
@@ -178,6 +180,27 @@ function trombi_display_views() {
 	wp_enqueue_script('jquery');
 	wp_enqueue_script('jquery-ui-dialog');
 	$output = '';
+	
+	if ( !isset( $clicface_trombi_settings['vignette_color_border'] ) ) $clicface_trombi_settings['vignette_color_border'] = '#B5D9EA';
+	if ( !isset( $clicface_trombi_settings['vignette_color_background_top'] ) ) $clicface_trombi_settings['vignette_color_background_top'] = '#EDF7FF';
+	if ( !isset( $clicface_trombi_settings['vignette_color_background_bottom'] ) ) $clicface_trombi_settings['vignette_color_background_bottom'] = '#CDE7EE';
+	if ( !isset( $clicface_trombi_settings['trombi_affichage_type'] ) ) $clicface_trombi_settings['trombi_affichage_type'] = 'grid';
+	if ( !isset( $clicface_trombi_settings['trombi_display_service'] ) ) $clicface_trombi_settings['trombi_display_service'] = 'oui';
+	if ( !isset( $clicface_trombi_settings['trombi_display_phone'] ) ) $clicface_trombi_settings['trombi_display_phone'] = 'non';
+	if ( !isset( $clicface_trombi_settings['trombi_display_cellular'] ) ) $clicface_trombi_settings['trombi_display_cellular'] = 'non';
+	if ( !isset( $clicface_trombi_settings['trombi_display_email'] ) ) $clicface_trombi_settings['trombi_display_email'] = 'non';
+	if ( !isset( $clicface_trombi_settings['trombi_collaborateurs_par_ligne'] ) ) $clicface_trombi_settings['trombi_collaborateurs_par_ligne'] = 3;
+	if ( !isset( $clicface_trombi_settings['vignette_width'] ) ) $clicface_trombi_settings['vignette_width'] = 250;
+	if ( !isset( $clicface_trombi_settings['trombi_target_window'] ) ) $clicface_trombi_settings['trombi_target_window'] = '_blank';
+	if ( !isset( $clicface_trombi_settings['trombi_profile_width'] ) ) $clicface_trombi_settings['trombi_profile_width'] = 720;
+	if ( !isset( $clicface_trombi_settings['trombi_profile_height'] ) ) $clicface_trombi_settings['trombi_profile_height'] = 440;
+	if ( !isset( $clicface_trombi_settings['trombi_display_worksite'] ) ) $clicface_trombi_settings['trombi_display_worksite'] = 'non';
+	if ( !isset( $clicface_trombi_settings['trombi_display_return_link'] ) ) $clicface_trombi_settings['trombi_display_return_link'] = 'non';
+	if ( !isset( $clicface_trombi_settings['trombi_move_to_anchor'] ) ) $clicface_trombi_settings['trombi_move_to_anchor'] = 'non';
+	if ( !isset( $clicface_trombi_settings['trombi_thickbox_width'] ) ) $clicface_trombi_settings['trombi_thickbox_width'] = 800;
+	if ( !isset( $clicface_trombi_settings['trombi_thickbox_height'] ) ) $clicface_trombi_settings['trombi_thickbox_height'] = 670;
+	if ( !isset( $clicface_trombi_settings['trombi_title_name_singular'] ) ) $clicface_trombi_settings['trombi_title_name_singular'] = __('Employee', 'clicface-trombi');
+	if ( !isset( $clicface_trombi_settings['trombi_title_name_plural'] ) ) $clicface_trombi_settings['trombi_title_name_plural'] = __('Employees', 'clicface-trombi');
 	
 	// query
 	$args = array(

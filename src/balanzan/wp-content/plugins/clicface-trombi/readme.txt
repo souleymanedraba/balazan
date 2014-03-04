@@ -3,8 +3,8 @@ Contributors: clicface
 Donate link: http://www.clicface.com/
 Tags: online directory, directory, employee, employee list, employees, staff, staff directory, staff list, business directory, member directory, trombinoscope, org chart
 Requires at least: 2.9.2
-Tested up to: 3.8
-Stable tag: 1.12
+Tested up to: 3.8.1
+Stable tag: 1.13
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,6 +17,12 @@ Clicface Trombi is a great plugin for WordPress that creates a directory of all 
 A new employee in the company, a new trainee, a new interim, reorganization of service, relocation of an entity... how to quickly and efficiently disseminate essential information (names, photos, contact information) to all of the company without a suitable tool?
 
 Clicface Trombi is the solution to easily publish the directory of an organization: you are running a clear and transparent information to your employees and customers by providing a pleasant tool to identify the right person within the company.
+
+
+Stay in touch with Clicface updates by [subscribing to our newsletter](http://eepurl.com/Oz7YH). New subscribers automatically receive discount vouchers.
+
+
+Need help? Check our [FAQ](http://www.clicface.com/documentation/faq/) or [create a new support ticket](http://support.clicface.com/).
 
 
 Features: (depending on the version)
@@ -35,6 +41,7 @@ Supported languages:
 
 * English
 * French
+* Vietnamese
 
 == Installation ==
 
@@ -83,6 +90,11 @@ If you need help, feel free to contact us using the [Support Ticket System](http
 Screenshots are available on the [Clicface Trombi plugin website](http://www.clicface.com/screenshots).
 
 == Changelog ==
+= 1.13 =
+* Fixing employee's title
+* Fixing picture attachment
+* Adding default picture
+
 = 1.12 =
 * Updating Piklist version
 

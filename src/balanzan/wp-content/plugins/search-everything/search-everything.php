@@ -3,12 +3,12 @@
 Plugin Name: Search Everything
 Plugin URI: https://github.com/Zemanta/search-everything-wordpress-plugin/
 Description: Adds search functionality without modifying any template pages: Activate, Configure and Search. Options Include: search highlight, search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
-Version: 7.0.2
+Version: 8.0
 Author: Zemanta
 Author URI: http://www.zemanta.com
 */
 
-define('SE_VERSION', '7.0.2');
+define('SE_VERSION', '8.0');
 
 if (!defined('SE_PLUGIN_FILE'))
 	define('SE_PLUGIN_FILE', plugin_basename(__FILE__));
@@ -22,15 +22,69 @@ if (!defined('SE_PLUGIN_DIR'))
 if (!defined('SE_PLUGIN_URL'))
 	define('SE_PLUGIN_URL', WP_PLUGIN_URL . '/' . SE_PLUGIN_NAME);
 
+if (!defined('SE_ZEMANTA_API_GATEWAY'))
+	define('SE_ZEMANTA_API_GATEWAY', 'http://api.zemanta.com/services/rest/0.0/');
+
+if (!defined('SE_ZEMANTA_DASHBOARD_URL'))
+	define('SE_ZEMANTA_DASHBOARD_URL', 'http://blogmind.zemanta.com/');
+
+if (!defined('SE_ZEMANTA_PREFS_URL'))
+	define('SE_ZEMANTA_PREFS_URL', 'http://prefs.zemanta.com/api/get-sfid/');
+
+if (!defined('SE_ZEMANTA_LOGO_URL'))
+	define('SE_ZEMANTA_LOGO_URL', 'http://www.zemanta.com');
+
+if (!defined('SE_PREFS_STATE_FOUND')) {
+	define('SE_PREFS_STATE_FOUND', 1);
+	define('SE_PREFS_STATE_FAILED', -2);
+	define('SE_PREFS_STATE_NOT_ENGLISH', -4);
+	define('SE_PREFS_STATE_EMPTY', -7);
+}
+
 include_once(SE_PLUGIN_DIR . '/config.php');
 include_once(SE_PLUGIN_DIR . '/options.php');
 
 add_action('wp_loaded','se_initialize_plugin');
 
 function se_initialize_plugin() {
-$SE = new SearchEverything();
-//add filters based upon option settings
+	$SE = new SearchEverything();
+	
+	//add filters based upon option settings
+	//include_once(SE_PLUGIN_DIR . '/zemanta/zemanta.php');
+	//$se_zemanta = new SEZemanta();
 }
+
+function se_get_view($view) {
+	return SE_PLUGIN_DIR . "/views/$view.php";
+}
+
+function se_admin_head() {
+	$se_options = se_get_options();
+	$se_meta = se_get_meta();
+	$se_metabox = $se_options['se_research_metabox'];
+	include(se_get_view('admin_head'));
+}
+
+add_action('admin_head', 'se_admin_head');
+
+function se_global_notice() {
+	global $pagenow, $se_global_notice_pages;
+	
+	$se_meta = se_get_meta();
+
+	$close_url = admin_url( 'options-general.php' );
+	$close_url = add_query_arg( array(
+		'page' => 'extend_search',
+		'se_global_notice' => 0,
+	), $close_url );
+
+	$notice = $se_meta['se_global_notice'];
+	
+	if ($notice && in_array($pagenow, $se_global_notice_pages)) {
+		include(se_get_view('global_notice'));
+	}
+}
+add_action('all_admin_notices', 'se_global_notice' );
 
 class SearchEverything {
 
@@ -39,23 +93,49 @@ class SearchEverything {
 	var $wp_ver23;
 	var $wp_ver25;
 	var $wp_ver28;
+	var $ajax_request;
 	private $query_instance;
 
-	function SearchEverything() {
+	function SearchEverything($ajax_query=false) {
 		global $wp_version;
 		$this->wp_ver23 = ( $wp_version >= '2.3' );
 		$this->wp_ver25 = ( $wp_version >= '2.5' );
 		$this->wp_ver28 = ( $wp_version >= '2.8' );
+		$this->ajax_request = $ajax_query ? true : false;
 		$this->options = se_get_options();
 
+		if ($this->ajax_request) {
+			$this->init_ajax($ajax_query);
+		}
+		else {
+			$this->init();
+		}		
+	}
+
+	function init_ajax($query) {
+		$this->search_hooks();
+	}
+
+	function init() {
 		if ( current_user_can('manage_options') ) {
 			$SEAdmin = new se_admin();
 			// Disable Search-Everything, because posts_join is not working properly in Wordpress-backend's Ajax functions
-			if ( basename( $_SERVER["SCRIPT_NAME"] ) == "admin-ajax.php" ) {
+			if (basename( $_SERVER["SCRIPT_NAME"] ) == "admin-ajax.php") {
 				return true;
 			}
 		}
 
+		$this->search_hooks();
+
+		// Highlight content
+		if ( $this->options['se_use_highlight'] ) {
+			add_filter( 'the_content', array( &$this, 'se_postfilter' ), 11 );
+			add_filter( 'the_title', array( &$this, 'se_postfilter' ), 11 );
+			add_filter( 'the_excerpt', array( &$this, 'se_postfilter' ), 11 );
+		}
+	}
+
+	function search_hooks() {
 		//add filters based upon option settings
 		if ( $this->options['se_use_tag_search'] || $this->options['se_use_category_search'] || $this->options['se_use_tax_search'] ) {
 			add_filter( 'posts_join', array( &$this, 'se_terms_join' ) );
@@ -129,15 +209,7 @@ class SearchEverything {
 		add_filter( 'posts_where', array( &$this, 'se_no_future' ) );
 
 		add_filter( 'posts_request', array( &$this, 'se_log_query' ), 10, 2 );
-
-		// Highlight content
-		if ( $this->options['se_use_highlight'] ) {
-			add_filter( 'the_content', array( &$this, 'se_postfilter' ), 11 );
-			add_filter( 'the_title', array( &$this, 'se_postfilter' ), 11 );
-			add_filter( 'the_excerpt', array( &$this, 'se_postfilter' ), 11 );
-		}
 	}
-
 
 	// creates the list of search keywords from the 's' parameters.
 	function se_get_search_terms() {
@@ -162,7 +234,7 @@ class SearchEverything {
 	// add where clause to the search query
 	function se_search_where( $where, $wp_query ) {
 
-		if ( !$wp_query->is_search() )
+		if ( !$wp_query->is_search() && !$this->ajax_request)
 			return $where;
 
 		$this->query_instance = &$wp_query;
@@ -206,29 +278,35 @@ class SearchEverything {
 	// search for terms in default locations like title and content
 	// replacing the old search terms seems to be the best way to
 	// avoid issue with multiple terms
-	function se_search_default() {
+	function se_search_default(){ 
 
 		global $wpdb;
 
-		$n = ( isset( $this->query_instance->query_vars['exact'] ) && $this->query_instance->query_vars['exact'] ) ? '' : '%';
-		$search = '';
+		$not_exact = empty($this->query_instance->query_vars['exact']);
+		$search_sql_query = '';
 		$seperator = '';
 		$terms = $this->se_get_search_terms();
 
 		// if it's not a sentance add other terms
-		$search .= '(';
+		$search_sql_query .= '(';
 		foreach ( $terms as $term ) {
-			$search .= $seperator;
+			$search_sql_query .= $seperator;
 
+			$esc_term = esc_sql($term);
+			if ($not_exact) {
+				$esc_term = "%$esc_term%";
+			}
 
-			$search .= sprintf( "((%s.post_title LIKE '%s%s%s') OR (%s.post_content LIKE '%s%s%s'))", $wpdb->posts, $n, $term, $n, $wpdb->posts, $n, $term, $n );
-
+			$like_title = "($wpdb->posts.post_title LIKE '$esc_term')";
+			$like_post = "($wpdb->posts.post_content LIKE '$esc_term')";
+			
+			$search_sql_query .= "($like_title OR $like_post)";
 
 			$seperator = ' AND ';
 		}
 
-		$search .= ')';
-		return $search;
+		$search_sql_query .= ')';
+		return $search_sql_query;
 	}
 
 	// Exclude post revisions
@@ -373,7 +451,7 @@ class SearchEverything {
 		$s = $vars['s'];
 		$search_terms = $this->se_get_search_terms();
 		$exact = isset( $vars['exact'] ) ? $vars['exact'] : '';
-
+		$search = '';
 		if ( !empty( $search_terms ) ) {
 			// Building search query on comments content
 			$n = ( $exact ) ? '' : '%';
@@ -505,7 +583,7 @@ class SearchEverything {
 	function se_build_search_tag() {
 		global $wpdb;
 		$vars = $this->query_instance->query_vars;
-		
+
 		$s = $vars['s'];
 		$search_terms = $this->se_get_search_terms();
 		$exact = isset( $vars['exact'] ) ? $vars['exact'] : '';
@@ -704,7 +782,7 @@ class SearchEverything {
 				foreach ( $all_taxonomies as $taxonomy ) {
 					if ( in_array( $taxonomy, $filter_taxonomies ) )
 						continue;
-					$on[] = "ttax.taxonomy = '".addslashes( $taxonomy )."'";
+					$on[] = "ttax.taxonomy = '" . addslashes( $taxonomy )."'";
 				}
 			}
 			// build our final string
@@ -755,4 +833,86 @@ class SearchEverything {
 	}// se_log_query
 } // END
 
-?>
+add_action('wp_ajax_search_everything', 'search_everything_callback');
+
+function search_everything_callback() {
+	$is_query = !empty($_GET['s']);
+	$result = array();
+	if ($is_query) {
+		$result = array(
+			'own' => array(),
+			'external' => array()
+		);
+
+		$params = array(
+			's' => $_GET['s']
+		);
+
+		$zemanta_response = api(array(
+			'method' => 'zemanta.suggest',
+			'return_images' => 0,
+			'return_rich_objects' => 0,
+			'return_articles' => 1,
+			'return_markup' => 0,
+			'return_rdf_links' => 0,
+			'return_keywords' => 0,
+			'careful_pc' => 1,
+			'interface' => 'wordpress-se',
+			'format' => 'json',
+			'emphasis' => $_GET['s'],
+			'text' => $_GET['text']
+		));
+
+		if (!is_wp_error($zemanta_response) && $zemanta_response['response']['code'] == 200) {
+			$result['external'] = json_decode($zemanta_response['body'])->articles;
+		}
+
+		$SE = new SearchEverything(true);
+
+		if (!empty($_GET['exact'])) {
+			$params['exact'] = true;
+		}
+
+		$post_query = new WP_query($params);
+
+		while ( $post_query->have_posts() ) {
+			$post_query->the_post();
+
+			$result['own'][] = get_post();
+		}
+		$post_query->reset_postdata();
+		
+	}
+	print json_encode($result);
+	die();
+}
+
+function se_enqueue_styles() {
+	wp_enqueue_style('se-link-styles', SE_PLUGIN_URL . '/static/css/se-styles.css');
+}
+
+add_action('wp_enqueue_scripts', 'se_enqueue_styles');
+
+
+
+function se_post_publish_ping($post_id) {
+	//should happen only on first publish
+	if( ( $_POST['post_status'] == 'publish' ) && ( $_POST['original_post_status'] != 'publish' ) ) {
+		$permalink = get_permalink($post_id);
+
+		$zemanta_response = api(array(
+			'method' => 'zemanta.post_published_ping',
+			'current_url' => $permalink,
+			'post_url' => $permalink,
+			'post_rid' => '',
+			'interface' => 'wordpress-se',
+			'deployment' => 'search-everything',
+			'format' => 'json'
+		));
+
+		$status = json_decode($zemanta_response['body'])->status;
+	}
+}
+
+add_action( 'publish_post', 'se_post_publish_ping' );
+
